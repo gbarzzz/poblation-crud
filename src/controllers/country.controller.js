@@ -1,13 +1,13 @@
 import { getConnection } from "./../database/database";
 
 //Read
-const getCountrys = async (req, res) =>{
-    try{
+const getCountrys = async (req, res) => {
+    try {
         const connection = await getConnection();
         const result = await connection.query("SELECT idcountry, name, poblation FROM country");
         //console.log(result);
         res.json(result);
-    }catch (error) {
+    } catch (error) {
         res.status(500);
         res.send(error.message)
     }
@@ -32,8 +32,8 @@ const addCountry = async (req, res) => {
     try {
         const { name, poblation } = req.body;
 
-        if(name===undefined || poblation===undefined){
-            res.status(400).json({ message: "** Bad Request **"});
+        if (name === undefined || poblation === undefined) {
+            res.status(400).json({ message: "** Bad Request **" });
         }
 
         const country = { name, poblation };
@@ -52,13 +52,13 @@ const updateCountry = async (req, res) => {
         const { id } = req.params;
         const { name, poblation } = req.body;
 
-        if ( id === undefined || name === undefined || poblation === undefined) {
+        if (id === undefined || name === undefined || poblation === undefined) {
             res.status(400).json({ message: "** Bad Request **" });
         }
 
         const country = { name, poblation };
         const connection = await getConnection();
-        const result = await connection.query("UPDATE country SET ? WHERE idcountry = ?", [country,id]);
+        const result = await connection.query("UPDATE country SET ? WHERE idcountry = ?", [country, id]);
         res.json(result);
     } catch (error) {
         res.status(500);

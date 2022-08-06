@@ -13,6 +13,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // routes
-app.use("/api/countrys",countryRoutes);
+app.use("/api/countrys", countryRoutes);
 
 export default app;
